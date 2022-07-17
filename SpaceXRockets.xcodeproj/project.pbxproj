@@ -58,16 +58,56 @@
 		1A1504A7288437D4005889AE /* SpaceXRockets */ = {
 			isa = PBXGroup;
 			children = (
-				1A1504A8288437D4005889AE /* AppDelegate.swift */,
-				1A1504AA288437D4005889AE /* SceneDelegate.swift */,
-				1A1504BC288438BF005889AE /* RocketsTableViewController.swift */,
-				1A1504BE28843A08005889AE /* RocketTableViewCell.swift */,
-				1A1504C028844E60005889AE /* NetworkManager.swift */,
-				1A1504C228844E8A005889AE /* Rocket.swift */,
-				1A1504B1288437D5005889AE /* Assets.xcassets */,
-				1A1504B6288437D5005889AE /* Info.plist */,
+				1A1504C428847BCC005889AE /* View Controllers */,
+				1A1504C728847C1A005889AE /* Network */,
+				1A1504C528847BE7005889AE /* Models */,
+				1A1504C828847C2D005889AE /* Resources */,
+				1A1504C628847C03005889AE /* App */,
 			);
 			path = SpaceXRockets;
+			sourceTree = "<group>";
+		};
+		1A1504C428847BCC005889AE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A1504BC288438BF005889AE /* RocketsTableViewController.swift */,
+				1A1504BE28843A08005889AE /* RocketTableViewCell.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1A1504C528847BE7005889AE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A1504C228844E8A005889AE /* Rocket.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1A1504C628847C03005889AE /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1A1504A8288437D4005889AE /* AppDelegate.swift */,
+				1A1504AA288437D4005889AE /* SceneDelegate.swift */,
+				1A1504B6288437D5005889AE /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1A1504C728847C1A005889AE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1A1504C028844E60005889AE /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1A1504C828847C2D005889AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A1504B1288437D5005889AE /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,7 +314,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DV8Z845Y2C;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SpaceXRockets/Info.plist;
+				INFOPLIST_FILE = SpaceXRockets/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -301,7 +341,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DV8Z845Y2C;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SpaceXRockets/Info.plist;
+				INFOPLIST_FILE = SpaceXRockets/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
