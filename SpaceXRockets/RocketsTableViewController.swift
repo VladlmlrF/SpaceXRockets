@@ -9,77 +9,67 @@ import UIKit
 
 class RocketsTableViewController: UITableViewController {
 
+    private let cellIndentifire = "RocketCell"
+    private let urlString = "https://api.spacexdata.com/v4/rockets"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
+        view.backgroundColor = .black
+        changeNavBar()
+        tableView.register(RocketTableViewCell.self, forCellReuseIdentifier: cellIndentifire)
+    }
+    
+    // MARK: - Private methods
+    
+    private func changeNavBar() {
+        title = "Rockets"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .black
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        4
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIndentifire) as? RocketTableViewCell {
+            cell.backgroundColor = view.backgroundColor
+            let backgroundColorView = UIView()
+            backgroundColorView.backgroundColor = view.backgroundColor
+            cell.selectedBackgroundView = backgroundColorView
+            
+            guard let url = URL(string: urlString) else { return UITableViewCell() }
+            
+            NetworkManager.fetchRocketImage(url: url, indexPath: indexPath) { rocketImage in
+                cell.rocketImageView.image = rocketImage
+            }
+            
+            NetworkManager.fetchRocketData(url: url, indexPath: indexPath) { rocketName, rocketHeight, rocketDiameter, rocketMass in
+                cell.rocketNameLabel.text = rocketName
+                cell.rocketHeightLabel.text = rocketHeight
+                cell.rocketDiameterLabel.text = rocketDiameter
+                cell.rocketMassLabel.text = rocketMass
+            }
+            return cell
+        }
+        return UITableViewCell()
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        200
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
