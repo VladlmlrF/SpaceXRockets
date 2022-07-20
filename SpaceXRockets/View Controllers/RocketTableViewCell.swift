@@ -47,7 +47,7 @@ class RocketTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         if self.isSelected {
-            contentView.backgroundColor = .red
+            contentView.backgroundColor = .lightGray
         } else {
             contentView.backgroundColor = .darkGray
         }
@@ -72,7 +72,6 @@ class RocketTableViewCell: UITableViewCell {
     }
     
     private func setupLabel(label: UILabel, font: UIFont) {
-        label.text = "Hello"
         label.textColor = .white
         label.textAlignment = .right
         label.font = font

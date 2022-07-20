@@ -30,11 +30,9 @@ class RocketsTableViewController: UITableViewController {
         appearance.backgroundColor = .black
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        
+
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
     // MARK: - Table view data source
@@ -52,16 +50,26 @@ class RocketsTableViewController: UITableViewController {
             
             guard let url = URL(string: urlString) else { return UITableViewCell() }
             
-            NetworkManager.fetchRocketImage(url: url, indexPath: indexPath) { rocketImage in
+            NetworkManager.fetchRocketImage(url: url, index: indexPath.row) { rocketImage in
                 cell.rocketImageView.image = rocketImage
             }
             
-            NetworkManager.fetchRocketData(url: url, indexPath: indexPath) { rocketName, rocketHeight, rocketDiameter, rocketMass in
+            NetworkManager.fetchRocketName(url: url, index: indexPath.row) { rocketName in
                 cell.rocketNameLabel.text = rocketName
-                cell.rocketHeightLabel.text = rocketHeight
-                cell.rocketDiameterLabel.text = rocketDiameter
-                cell.rocketMassLabel.text = rocketMass
             }
+            
+            NetworkManager.fetchRocketHeight(url: url, index: indexPath.row) { rocketHeight in
+                cell.rocketHeightLabel.text = "Высота: " + rocketHeight + " м"
+            }
+            
+            NetworkManager.fetchRocketDiameter(url: url, index: indexPath.row) { rocketDiameter in
+                cell.rocketDiameterLabel.text = "Диаметр: " + rocketDiameter + " м"
+            }
+            
+            NetworkManager.fetchRocketMass(url: url, index: indexPath.row) { rocketMass in
+                cell.rocketMassLabel.text = "Масса: " + rocketMass + " кг"
+            }
+            
             return cell
         }
         return UITableViewCell()
@@ -71,5 +79,12 @@ class RocketsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         200
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailsVC = DetailsViewController()
+        detailsVC.urlString = urlString
+        detailsVC.index = indexPath.row
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

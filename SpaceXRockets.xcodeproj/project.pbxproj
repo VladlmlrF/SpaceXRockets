@@ -14,6 +14,11 @@
 		1A1504BF28843A08005889AE /* RocketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1504BE28843A08005889AE /* RocketTableViewCell.swift */; };
 		1A1504C128844E60005889AE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1504C028844E60005889AE /* NetworkManager.swift */; };
 		1A1504C328844E8A005889AE /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1504C228844E8A005889AE /* Rocket.swift */; };
+		1A1504CA28847CCC005889AE /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1504C928847CCC005889AE /* DetailsViewController.swift */; };
+		1AF16EAF2887E2B80064BCED /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF16EAE2887E2B80064BCED /* DetailsTableViewCell.swift */; };
+		1AF16EB3288873FD0064BCED /* RocketLaunches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF16EB2288873FD0064BCED /* RocketLaunches.swift */; };
+		1AF16EB52888743F0064BCED /* LaunchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF16EB42888743F0064BCED /* LaunchesTableViewController.swift */; };
+		1AF16EB7288874D80064BCED /* LaunchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF16EB6288874D80064BCED /* LaunchesCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		1A1504BE28843A08005889AE /* RocketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketTableViewCell.swift; sourceTree = "<group>"; };
 		1A1504C028844E60005889AE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		1A1504C228844E8A005889AE /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
+		1A1504C928847CCC005889AE /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		1AF16EAE2887E2B80064BCED /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
+		1AF16EB2288873FD0064BCED /* RocketLaunches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunches.swift; sourceTree = "<group>"; };
+		1AF16EB42888743F0064BCED /* LaunchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesTableViewController.swift; sourceTree = "<group>"; };
+		1AF16EB6288874D80064BCED /* LaunchesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +82,10 @@
 			children = (
 				1A1504BC288438BF005889AE /* RocketsTableViewController.swift */,
 				1A1504BE28843A08005889AE /* RocketTableViewCell.swift */,
+				1A1504C928847CCC005889AE /* DetailsViewController.swift */,
+				1AF16EAE2887E2B80064BCED /* DetailsTableViewCell.swift */,
+				1AF16EB42888743F0064BCED /* LaunchesTableViewController.swift */,
+				1AF16EB6288874D80064BCED /* LaunchesCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -80,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				1A1504C228844E8A005889AE /* Rocket.swift */,
+				1AF16EB2288873FD0064BCED /* RocketLaunches.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,8 +197,13 @@
 				1A1504BD288438BF005889AE /* RocketsTableViewController.swift in Sources */,
 				1A1504A9288437D4005889AE /* AppDelegate.swift in Sources */,
 				1A1504C128844E60005889AE /* NetworkManager.swift in Sources */,
+				1AF16EB7288874D80064BCED /* LaunchesCell.swift in Sources */,
 				1A1504C328844E8A005889AE /* Rocket.swift in Sources */,
+				1A1504CA28847CCC005889AE /* DetailsViewController.swift in Sources */,
 				1A1504AB288437D4005889AE /* SceneDelegate.swift in Sources */,
+				1AF16EB52888743F0064BCED /* LaunchesTableViewController.swift in Sources */,
+				1AF16EAF2887E2B80064BCED /* DetailsTableViewCell.swift in Sources */,
+				1AF16EB3288873FD0064BCED /* RocketLaunches.swift in Sources */,
 				1A1504BF28843A08005889AE /* RocketTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
