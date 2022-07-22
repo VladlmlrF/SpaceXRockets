@@ -156,8 +156,9 @@ class NetworkManager {
                 let rockets = try decoder.decode([Rocket].self, from: data)
                 guard let firstStart = rockets[index].firstFlight else { return }
                 var rocketFirstStart = ""
+                let editedDate = firstStart.split(separator: "-").reversed().joined(separator: ".")
                 DispatchQueue.main.async {
-                    rocketFirstStart = firstStart
+                    rocketFirstStart = editedDate
                     completion(rocketFirstStart)
                 }
             } catch {
@@ -182,7 +183,11 @@ class NetworkManager {
                 guard let country = rockets[index].country else { return }
                 var firstStartCountry = ""
                 DispatchQueue.main.async {
-                    firstStartCountry = country
+                    if country == "United States" {
+                        firstStartCountry = "США"
+                    } else if country == "Republic of the Marshall Islands" {
+                        firstStartCountry = "Маршалловы острова"
+                    }
                     completion(firstStartCountry)
                 }
             } catch {
@@ -207,7 +212,7 @@ class NetworkManager {
                 guard let cost = rockets[index].costPerLaunch else { return }
                 var firstStartCost = ""
                 DispatchQueue.main.async {
-                    firstStartCost = "\(cost)"
+                    firstStartCost = "$\(cost / 1000000) млн"
                     completion(firstStartCost)
                 }
             } catch {
@@ -405,9 +410,11 @@ class NetworkManager {
             do {
                 let launches = try decoder.decode([RocketLaunches].self, from: data)
                 guard let date = launches[index].dateLocal else { return }
+                var editedDate = date
+                editedDate.removeLast(15)
                 var launchDate = ""
                 DispatchQueue.main.async {
-                    launchDate = date
+                    launchDate = editedDate.split(separator: "-").reversed().joined(separator: ".")
                     completion(launchDate)
                 }
             } catch {
