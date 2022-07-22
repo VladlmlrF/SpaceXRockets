@@ -23,7 +23,7 @@ class RocketsTableViewController: UITableViewController {
     // MARK: - Private methods
     
     private func changeNavBar() {
-        title = "Rockets"
+        title = "Ракеты"
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let appearance = UINavigationBarAppearance()

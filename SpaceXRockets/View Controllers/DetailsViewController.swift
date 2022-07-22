@@ -13,8 +13,10 @@ class DetailsViewController: UIViewController {
     private let backgroundView = UIView()
     private let rocketNameLabel = UILabel()
     private let tableView = UITableView()
+    private let showLaunchesButton = UIButton(type: .roundedRect)
     
     private let cellIndentifire = "DetailCell"
+    private let launchUrlString = "https://api.spacexdata.com/v4/launches"
     
     private let sectionNames = [
         "ХАРАКТЕРИСТИКИ",
@@ -23,9 +25,10 @@ class DetailsViewController: UIViewController {
         "ВТОРАЯ СТУПЕНЬ"
     ]
     
-    var urlString: String!
-    var index: Int!
-    var counter = 0
+    private var counter = 0
+    var urlString = ""
+    var index = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +44,14 @@ class DetailsViewController: UIViewController {
         fetchDataToLaunch()
     }
     
+    // MARK: - Private methods
     private func setupRocketImageView() {
-        rocketImageView.frame = CGRect(x: 0, y: navigationController?.navigationBar.frame.height ?? 0, width: view.frame.width, height: view.frame.height * 0.5)
+        rocketImageView.frame = CGRect(
+            x: 0,
+            y: navigationController?.navigationBar.frame.height ?? 0,
+            width: view.frame.width,
+            height: view.frame.height * 0.5
+        )
         rocketImageView.contentMode = .scaleToFill
         rocketImageView.backgroundColor = .black
         view.addSubview(rocketImageView)
@@ -50,14 +59,24 @@ class DetailsViewController: UIViewController {
     
     private func setupBackgroundView() {
         let backgroundViewOriginY = view.frame.height * 0.5 - 30 + (navigationController?.navigationBar.frame.height ?? 0)
-        backgroundView.frame = CGRect(x: 0, y: backgroundViewOriginY, width: view.frame.width, height: view.frame.height - backgroundViewOriginY + 30)
+        backgroundView.frame = CGRect(
+            x: 0,
+            y: backgroundViewOriginY,
+            width: view.frame.width,
+            height: view.frame.height - backgroundViewOriginY + 30
+        )
         backgroundView.backgroundColor = .black
         backgroundView.layer.cornerRadius = 30
         view.addSubview(backgroundView)
     }
     
     private func setupRocketNameLabel() {
-        rocketNameLabel.frame = CGRect(x: 30, y: 10, width: view.frame.width / 2, height: 30)
+        rocketNameLabel.frame = CGRect(
+            x: 30,
+            y: 10,
+            width: view.frame.width / 2,
+            height: 30
+        )
         rocketNameLabel.font = .boldSystemFont(ofSize: 24)
         rocketNameLabel.textColor = .white
         rocketNameLabel.adjustsFontSizeToFitWidth = true
@@ -65,8 +84,16 @@ class DetailsViewController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView.register(DetailsTableViewCell.self, forCellReuseIdentifier: cellIndentifire)
-        tableView.frame = CGRect(x: 0, y: 40, width: backgroundView.frame.width, height: backgroundView.frame.height - 40)
+        tableView.register(
+            DetailsTableViewCell.self,
+            forCellReuseIdentifier: cellIndentifire
+        )
+        tableView.frame = CGRect(
+            x: 0,
+            y: 40,
+            width: backgroundView.frame.width,
+            height: backgroundView.frame.height - 40
+        )
         tableView.backgroundColor = .black
         tableView.delegate = self
         tableView.dataSource = self
@@ -74,7 +101,7 @@ class DetailsViewController: UIViewController {
     }
     
     private func changeNavBar() {
-        title = "Details"
+        title = "Подробности"
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let appearance = UINavigationBarAppearance()
@@ -100,8 +127,9 @@ class DetailsViewController: UIViewController {
     }
     
     private func fetchDataToLaunch() {
-        let urlString = "https://api.spacexdata.com/v4/launches"
-        guard let url = URL(string: urlString) else { return }
+
+        guard let url = URL(string: launchUrlString) else { return }
+
         let session = URLSession.shared
         session.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
@@ -147,8 +175,18 @@ class DetailsViewController: UIViewController {
             }
         }.resume()
     }
+    
+    @objc func toLaunches() {
+        let launchesVC = LaunchesTableViewController()
+        navigationController?.pushViewController(launchesVC, animated: true)
+        guard let rocketName = rocketNameLabel.text else { return }
+        
+        launchesVC.rocketName = rocketName
+        launchesVC.counter = self.counter
+    }
 }
 
+// MARK: - Table view delegate
 extension DetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -174,7 +212,6 @@ extension DetailsViewController: UITableViewDelegate {
         let footerView = UIView()
         footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
         footerView.backgroundColor = .black
-        let showLaunchesButton = UIButton(type: .roundedRect)
         showLaunchesButton.frame = CGRect(x: 0, y: 30, width: footerView.frame.width - 60, height: 60)
         showLaunchesButton.center.x = footerView.center.x
         showLaunchesButton.setTitle("Посмотреть запуски", for: .normal)
@@ -186,16 +223,9 @@ extension DetailsViewController: UITableViewDelegate {
         footerView.addSubview(showLaunchesButton)
         return footerView
     }
-    
-    @objc func toLaunches() {
-        let launchesVC = LaunchesTableViewController()
-        navigationController?.pushViewController(launchesVC, animated: true)
-        guard let rocketName = rocketNameLabel.text else { return }
-        launchesVC.rocketName = rocketName
-        launchesVC.counter = counter
-    }
 }
 
+// MARK: - Table view data source
 extension DetailsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

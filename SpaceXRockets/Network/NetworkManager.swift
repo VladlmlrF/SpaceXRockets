@@ -9,6 +9,7 @@ import UIKit
 
 class NetworkManager {
     
+    // MARK: - rocket Name
     static func fetchRocketName(
         url: URL,
         index: Int,
@@ -33,6 +34,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket Height
     static func fetchRocketHeight(
         url: URL,
         index: Int,
@@ -57,6 +59,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket Diameter
     static func fetchRocketDiameter(
         url: URL,
         index: Int,
@@ -81,6 +84,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket Mass
     static func fetchRocketMass(
         url: URL,
         index: Int,
@@ -105,6 +109,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket Image
     static func fetchRocketImage(
         url: URL,
         index: Int,
@@ -136,6 +141,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket First Flight
     static func fetchRocketFirstStart(
         url: URL,
         index: Int,
@@ -160,6 +166,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket First Flight Country
     static func fetchFirstStartCountry(
         url: URL,
         index: Int,
@@ -184,6 +191,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket First Flight Cost
     static func fetchFirstStartCost(
         url: URL,
         index: Int,
@@ -208,6 +216,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket First Stage Engines
     static func fetchFirstStageEngine(
         url: URL,
         index: Int,
@@ -232,6 +241,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket First Stage Fuels
     static func fetchFirstStageFuels(
         url: URL,
         index: Int,
@@ -256,6 +266,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket First Stage Burn
     static func fetchFirstStageBurn(
         url: URL,
         index: Int,
@@ -280,6 +291,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket Second Stage Engines
     static func fetchSecondStageEngine(
         url: URL,
         index: Int,
@@ -304,6 +316,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket Second Stage Fuels
     static func fetchSecondStageFuels(
         url: URL,
         index: Int,
@@ -328,6 +341,7 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - rocket Second Stage Burn
     static func fetchSecondStageBurn(
         url: URL,
         index: Int,
@@ -345,6 +359,85 @@ class NetworkManager {
                 DispatchQueue.main.async {
                     secondStageBurn = "\(burn)"
                     completion(secondStageBurn)
+                }
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    // MARK: - rocket Launch Name
+    static func fetchLaunchName(
+        url: URL,
+        index: Int,
+        completion: @escaping (_ launchName: String) -> ()
+    ) {
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, _, error in
+            guard let data = data else { return }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            do {
+                let launches = try decoder.decode([RocketLaunches].self, from: data)
+                guard let name = launches[index].name else { return }
+                var launchName = ""
+                DispatchQueue.main.async {
+                    launchName = name
+                    completion(launchName)
+                }
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    // MARK: - rocket Launch Date
+    static func fetchLaunchDate(
+        url: URL,
+        index: Int,
+        completion: @escaping (_ launchDate: String) -> ()
+    ) {
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, _, error in
+            guard let data = data else { return }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            do {
+                let launches = try decoder.decode([RocketLaunches].self, from: data)
+                guard let date = launches[index].dateLocal else { return }
+                var launchDate = ""
+                DispatchQueue.main.async {
+                    launchDate = date
+                    completion(launchDate)
+                }
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    //MARK: - rocket Launch Image
+    static func fetchLaunchImage(
+        url: URL,
+        index: Int,
+        completion: @escaping (_ launchImage: UIImage) -> ()
+    ) {
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, _, error in
+            guard let data = data else { return }
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            do {
+                let launches = try decoder.decode([RocketLaunches].self, from: data)
+                guard let success = launches[index].success else { return }
+                var launchImage = UIImage()
+                DispatchQueue.main.async {
+                    if success {
+                        launchImage = UIImage(named: "good") ?? UIImage()
+                    } else {
+                        launchImage = UIImage(named: "bad") ?? UIImage()
+                    }
+                    completion(launchImage)
                 }
             } catch {
                 print(error)

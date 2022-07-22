@@ -15,6 +15,7 @@ class RocketTableViewCell: UITableViewCell {
     let rocketDiameterLabel = UILabel()
     let rocketMassLabel = UILabel()
 
+    //MARK: - override metods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
