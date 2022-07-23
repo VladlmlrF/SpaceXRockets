@@ -411,7 +411,9 @@ class NetworkManager {
                 let launches = try decoder.decode([RocketLaunches].self, from: data)
                 guard let date = launches[index].dateLocal else { return }
                 var editedDate = date
-                editedDate.removeLast(15)
+                if editedDate.count >= 15 {
+                    editedDate.removeLast(15)
+                }
                 var launchDate = ""
                 DispatchQueue.main.async {
                     launchDate = editedDate.split(separator: "-").reversed().joined(separator: ".")
